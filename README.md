@@ -1,12 +1,38 @@
 Home Router Setup
 -----------------
 
+Why are you showing me this?
+============================
+
+I've solved a lot of weird problems to make my home internet connection
+work nicely, and used a lot of rarely-used / badly-documented features.
+Stackoverflow was unhelpful for most of these cases, so I thought it
+might be good to demonstrate a working setup.
+
+Notable fun:
+- how to give linux network interfaces consistent names across reboots,
+  when they are all USB NICs... with the same MAC address
+- how to use two default gateways with the same IP address
+- how to use a raspberry pi as a wifi access point
+- how to send HTTP requests for web pages over a fast connection, while
+  requesting video over a cheap connection
+- how to blackhole ads at the DNS level (like pi-hole, but with raw
+  dnsmasq)
+
+Coming soon:
+- how to add a button on a raspberry pi which executes a script and
+  displays the script output on an LCD display
+- how to intercept and modify HTTPS requests
+- how to save and restore ip rules / routes
+
+
 Context:
 ========
 
 - My home doesn't get fiber internet, and landline broadband is awful :(
 - Mobile internet from Vodafone is fast (100mbps), but capped at 150GB/mo
 - Mobile internet from Three is slow (1mbps on a good day, 200kbps normally), but uncapped
+- Every other 4G provider is slow AND capped to a few tens of GB/mo
 
 So I bought a pair of SIMs, a pair of USB 4G dongles, and a raspberry pi.
 
