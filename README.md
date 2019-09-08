@@ -5,8 +5,8 @@ Context:
 ========
 
 - My home doesn't get fiber internet, and landline broadband is awful :(
-- Mobile internet from Vodafone is fast, but capped at 150GB/mo
-- Mobile internet from Three is slow, but uncapped
+- Mobile internet from Vodafone is fast (100mbps), but capped at 150GB/mo
+- Mobile internet from Three is slow (1mbps on a good day, 200kbps normally), but uncapped
 
 So I bought a pair of SIMs, a pair of USB 4G dongles, and a raspberry pi.
 
@@ -76,3 +76,10 @@ rules (URL, domain name, etc) and then forward the request upstream with each
 packet marked "3" or "4" depending on whether we want fast or cheap.
 
 HTTPS intercept should be possible, but is work-in-progress.
+
+
+Turbo Button:
+=============
+
+TODO: Have a button on the pi which will route ALL traffic via the fast
+connection, for 15 minutes, then automatically reset to default routes.
