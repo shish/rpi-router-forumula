@@ -1,3 +1,7 @@
+#######################################################################
+# DHCP - 192.168.4.0/24 for wifi, 192.168.5.0/24 for ethernet
+# DNS - with ad networks blacklisted
+
 block-domains:
   file.managed:
     - name: /etc/block/domains

@@ -30,6 +30,13 @@ Coming soon:
 - how to intercept and modify HTTPS requests
 - how to save and restore ip rules / routes
 
+It's quite possible that some parts of my setup are sub-optimal or I've missed
+ a tool that does exactly what I want out of the box. Issues and pull requests
+ are welcome :)
+
+I'm also certain that a lot of this could be made more generic so that other
+people can use parts of it; but I'm currently in the "just make something work
+at all" phase of development.
 
 Context:
 --------

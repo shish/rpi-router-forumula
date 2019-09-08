@@ -1,3 +1,6 @@
+#######################################################################
+# HostAPd config for raspberry pi
+
 hostapd:
   pkg.installed:
     - name: hostapd
