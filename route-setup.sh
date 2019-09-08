@@ -66,3 +66,6 @@ fast "DNS" -p udp -m udp --dport 53
 fast "Overwatch" -p tcp -m multiport --dports 1119,3724,6113
 fast "UDP" -p udp
 cheap "Default"
+
+# Save for net boot
+iptables-save > /etc/iptables/rules.v4
