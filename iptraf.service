@@ -1,0 +1,10 @@
+[Unit]
+Description=IP Traffic Logger
+
+[Service]
+ExecStart=/usr/local/bin/iptraf -i %I -r
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

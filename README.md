@@ -1,8 +1,8 @@
 Home Router Setup
------------------
+=================
 
 Why are you showing me this?
-============================
+----------------------------
 
 I've solved a lot of weird problems to make my home internet connection
 work nicely, and used a lot of rarely-used / badly-documented features.
@@ -13,11 +13,15 @@ Notable fun:
 - how to give linux network interfaces consistent names across reboots,
   when they are all USB NICs... with the same MAC address
 - how to use two default gateways with the same IP address
-- how to use a raspberry pi as a wifi access point
+- how to use a raspberry pi as a 5GHz wifi access point
 - how to send HTTP requests for web pages over a fast connection, while
   requesting video over a cheap connection
 - how to blackhole ads at the DNS level (like pi-hole, but with raw
   dnsmasq)
+- generating a latency heatmap with telegraf / grafana
+- using python for traffic analysis (is my fast/cheap split working
+  correctly? Which family member is using the expensive connection
+  most? What kind of traffic are they sending?)
 
 Coming soon:
 - how to add a button on a raspberry pi which executes a script and
@@ -27,7 +31,7 @@ Coming soon:
 
 
 Context:
-========
+--------
 
 - My home doesn't get fiber internet, and landline broadband is awful :(
 - Mobile internet from Vodafone is fast (100mbps), but capped at 150GB/mo
@@ -81,7 +85,7 @@ lower usb3 port is wwanT (Three).
 
 
 The Actual Routing:
-===================
+-------------------
 
 Given two upstream interfaces, I then do:
 
@@ -92,7 +96,7 @@ Given two upstream interfaces, I then do:
 
 
 HTTP(S):
-========
+--------
 
 iptables rules can filter different kinds of IP packets, but in today's world
 basically every kind of packet is a HTTP packet. To deal with this, I have
@@ -105,7 +109,7 @@ HTTPS intercept should be possible, but is work-in-progress.
 
 
 Turbo Button:
-=============
+-------------
 
 TODO: Have a button on the pi which will route ALL traffic via the fast
 connection, for 15 minutes, then automatically reset to default routes.

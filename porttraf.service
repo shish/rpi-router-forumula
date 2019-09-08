@@ -1,0 +1,10 @@
+[Unit]
+Description=Port Traffic Logger
+
+[Service]
+ExecStart=/usr/local/bin/porttraf -i %I
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
