@@ -11,17 +11,18 @@ might be good to demonstrate a working setup.
 
 Notable fun:
 - how to give linux network interfaces consistent names across reboots,
-  when they are all USB NICs... with the same MAC address
-- how to use two default gateways with the same IP address
-- how to use a raspberry pi as a 5GHz wifi access point
-- how to send HTTP requests for web pages over a fast connection, while
-  requesting video over a cheap connection
-- how to blackhole ads at the DNS level (like pi-hole, but with raw
-  dnsmasq)
-- generating a latency heatmap with telegraf / grafana
+  [when they are all USB NICs... with the same MAC address](wwan.rules)
+- how to use [two default gateways with the same IP address](route-setup.sh)
+- how to use [a raspberry pi as a 5GHz wifi access point](hostapd.conf)
+- how to [route HTTP requests](squid.conf) - web pages over a fast
+  connection, while requesting video over a cheap connection
+- how to [blackhole ads at the DNS level](dnsmasq.sls) (like pi-hole,
+  but with raw dnsmasq)
+- generating a [latency heatmap with telegraf / grafana](pings.sls)
 - using python for traffic analysis (is my fast/cheap split working
-  correctly? Which family member is using the expensive connection
-  most? What kind of traffic are they sending?)
+  correctly?
+  [Which family member is using the expensive connection most?](iptraf.py)
+  [What kind of traffic are they sending?](porttraf.py))
 
 Coming soon:
 - how to add a button on a raspberry pi which executes a script and
@@ -63,8 +64,8 @@ The overall network looks like this:
 
 Originally I had the raspberry pi serving wifi and ethernet; which worked ok
 for internet access, but was a bottleneck on accessing the NAS. So I got a
-dedicated WiFi AP and plgged that into the switch -- so now the pi only handles
-internet routing, and is out of the path for local routing.
+dedicated WiFi AP and plugged that into the switch -- so now the pi only
+handles internet routing, and is out of the path for local routing.
 
 Something that has made this setup a lot trickier is that the wifi dongles I
 bought (Huawei E3372) have a fixed IP address and give a fixed IP address to
