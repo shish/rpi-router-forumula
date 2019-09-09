@@ -18,10 +18,11 @@ Notable fun:
   connection, while requesting video over a cheap connection
 - how to [blackhole ads at the DNS level](dnsmasq.sls) (like pi-hole,
   but with raw dnsmasq)
-- generating a [latency heatmap with telegraf / grafana](pings.sls)
-- using python for traffic analysis (is my fast/cheap split working
+- generating a [latency heatmap](pings.png) with
+  [telegraf / grafana](pings.sls)
+- using [python for traffic analysis](iptraf.py) (is my fast/cheap split working
   correctly?
-  [Which family member is using the expensive connection most?](iptraf.py)
+  [Which family member is most active?](iptraf.png)
   [What kind of traffic are they sending?](porttraf.py))
 
 Coming soon:
@@ -121,3 +122,10 @@ Turbo Button:
 
 TODO: Have a button on the pi which will route ALL traffic via the fast
 connection, for 15 minutes, then automatically reset to default routes.
+
+
+Monitoring:
+-----------
+
+I have a separate formula which sets up Telegraf on all my servers, and
+this router formula drops a couple of extra configs into /etc/telegraf.d/
