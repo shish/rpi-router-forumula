@@ -46,3 +46,8 @@ route-setup.sh:
     - runas: root
     - watch:
       - file: route-setup.sh
+
+turbo.sh:
+  file.managed:
+    - name: /root/turbo.sh
+    - source: salt://apps/router/turbo.sh
