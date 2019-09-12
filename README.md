@@ -20,10 +20,8 @@ Notable fun:
   but with raw dnsmasq)
 - generating a [latency heatmap](pings.png) with
   [telegraf / grafana](pings.sls)
-- using [python for traffic analysis](iptraf.py) (is my fast/cheap split working
-  correctly?
-  [Which family member is most active?](iptraf.png)
-  [What kind of traffic are they sending?](porttraf.py))
+- using [rust for traffic analysis](https://github.com/shish/packetstats)
+  to see which devices are most active and what they are doing
 
 Coming soon:
 - how to add a button on a raspberry pi which executes a script and

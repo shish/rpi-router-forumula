@@ -1,0 +1,10 @@
+[Unit]
+Description=IP Packet Stats
+
+[Service]
+ExecStart=/usr/local/bin/packetstats -i %I -s /tmp/packetstats.sock
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
