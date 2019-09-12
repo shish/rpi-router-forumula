@@ -10,8 +10,8 @@ telegraf_uplinks:
         [[inputs.ping]]
         urls = ["8.8.8.8"]
         count = 1
-        timeout = 10.0
-        deadline = 30
+        timeout = 5.0
+        deadline = 8
         interval = 60
         interface = "{{ interface }}"
         [inputs.ping.tags]
