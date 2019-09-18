@@ -31,12 +31,23 @@ net.ipv4.ip_forward:
   sysctl.present:
     - value: 1
 
-
-route-setup.sh:
+router_debug_things:
   pkg.installed:
     - pkgs:
       - iptables-persistent
       - tcpdump  # for debugging
+
+nat-setup.sh:
+  file.managed:
+    - name: /root/nat-setup.sh
+    - source: salt://apps/router/nat-setup.sh
+
+mangle-setup.sh:
+  file.managed:
+    - name: /root/mangle-setup.sh
+    - source: salt://apps/router/mangle-setup.sh
+
+route-setup.sh:
   file.managed:
     - name: /root/route-setup.sh
     - source: salt://apps/router/route-setup.sh
@@ -46,6 +57,8 @@ route-setup.sh:
     - runas: root
     - watch:
       - file: route-setup.sh
+      - file: mangle-setup.sh
+      - file: nat-setup.sh
 
 turbo.sh:
   file.managed:

@@ -15,61 +15,10 @@ ip route add table 3 default via 192.168.8.1 dev wwanT
 ip rule | grep -q 'fwmark 0x3' || ip rule add fwmark 3 lookup 3
 ip rule | grep -q 'fwmark 0x4' || ip rule add fwmark 4 lookup 4
 
-iptables -t nat -F
-iptables -t mangle -F
+# With the above setup, any packets marked 3 go to wwanT and
+# any marked 4 go to wwantV. The next script will use a bunch
+# of iptables rules to mark packets.
+bash /root/mangle-setup.sh
 
-#######################################################################
-# Squid intercept
-
-iptables -t nat -A PREROUTING -s 192.168.8.100 -p tcp --dport 80 -j ACCEPT
-iptables -t nat -A PREROUTING -p tcp --dport 80 -j DNAT --to-destination 192.168.5.1:3128
-# iptables -t nat -A PREROUTING -p tcp --dport 443 -j DNAT --to-destination 192.168.5.1:3129
-iptables -t mangle -A PREROUTING -p tcp --dport 3128 -j DROP
-
-#######################################################################
-# Output from us
-
-iptables -t mangle -A OUTPUT -m mark --mark 3 -j ACCEPT -m comment --comment "Premarked Three"
-iptables -t mangle -A OUTPUT -m mark --mark 4 -j ACCEPT -m comment --comment "Premarked Vodafone"
-
-
-#######################################################################
-# Routed from clients
-
-iptables -t nat -A POSTROUTING -j MASQUERADE
-
-function cheap {
-	local COMMENT=$1
-	shift
-	iptables -t mangle -A OUTPUT $* -j MARK --set-mark 3 -m comment --comment "$COMMENT Three"
-	iptables -t mangle -A OUTPUT $* -j ACCEPT
-	iptables -t mangle -A PREROUTING $* -j MARK --set-mark 3 -m comment --comment "$COMMENT Three"
-	iptables -t mangle -A PREROUTING $* -j ACCEPT
-}
-
-function fast {
-	local COMMENT=$1
-	shift
-	iptables -t mangle -A OUTPUT $* -j MARK --set-mark 4 -m comment --comment "$COMMENT Vodafone"
-	iptables -t mangle -A OUTPUT $* -j ACCEPT
-	iptables -t mangle -A PREROUTING $* -j MARK --set-mark 4 -m comment --comment "$COMMENT Vodafone"
-	iptables -t mangle -A PREROUTING $* -j ACCEPT
-}
-
-# Three's network is totally unusable at peak times
-# fast "HTTP(S) during busy hours" -p tcp -m multiport --dports 80,443 -m time --timestart 18:00:00 --timestop 23:00:00
-# fast "QUIC during busy hours" -p udp -m multiport --dports 80,443 -m time --timestart 18:00:00 --timestop 23:00:00
-
-cheap "Premarked" -m mark --mark 3
-fast "Premarked" -m mark --mark 4
-
-cheap "InfluxDB" -p tcp -m tcp --dport 8086
-fast "Salt" -p tcp -m multiport --dports 4505,4506
-cheap "QUIC" -p udp -m udp --dport 443
-fast "DNS" -p udp -m udp --dport 53
-fast "Overwatch" -p tcp -m multiport --dports 1119,3724,6113
-fast "UDP" -p udp
-cheap "Default"
-
-# Save for net boot
-iptables-save > /etc/iptables/rules.v4
+# We also want to do some magic to mark HTTP packets
+bash /root/nat-setup.sh

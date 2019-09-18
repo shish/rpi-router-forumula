@@ -15,7 +15,8 @@ Notable fun:
 - how to use [two default gateways with the same IP address](route-setup.sh)
 - how to use [a raspberry pi as a 5GHz wifi access point](hostapd.conf)
 - how to [route HTTP requests](squid.conf) - web pages over a fast
-  connection, while requesting video over a cheap connection
+  connection, while requesting video over a cheap connection - and how
+  to do that transparently by [intercepting traffic](nat-setup.sh)
 - how to [blackhole ads at the DNS level](dnsmasq.sls) (like pi-hole,
   but with raw dnsmasq)
 - generating a [latency heatmap](pings.png) with
