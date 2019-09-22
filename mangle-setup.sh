@@ -38,19 +38,27 @@ function fast {
 # fast "HTTP(S) during busy hours" -p tcp -m multiport --dports 80,443 -m time --timestart 18:00:00 --timestop 23:00:00
 # fast "QUIC during busy hours" -p udp -m multiport --dports 80,443 -m time --timestart 18:00:00 --timestop 23:00:00
 
+# System stuff
 cheap "Premarked Connection" -m connmark --mark 3
 fast "Premarked Connection" -m connmark --mark 4
 cheap "Premarked Packet" -m mark --mark 3
 fast "Premarked Packet" -m mark --mark 4
 
-cheap "Dongle" -p tcp -d 192.168.8.1
+# Specific destinations
+cheap "Dongle" -p tcp -m tcp --dport 80 -d 192.168.8.1
+fast "Graphs" -p tcp -m tcp --dport 443 -d aster.shishnet.org
+fast "Tesco" -p tcp -m tcp --dport 443 -d tesco.ie
+
+# Specific protocols
+fast "DNS" -p udp -m udp --dport 53
 fast "25% of InfluxDB" -p tcp -m tcp --dport 8086 -m statistic --mode random --probability 0.25
 cheap "InfluxDB" -p tcp -m tcp --dport 8086
 fast "Salt" -p tcp -m multiport --dports 4505,4506
 cheap "QUIC" -p udp -m udp --dport 443
-fast "DNS" -p udp -m udp --dport 53
 fast "Overwatch" -p tcp -m multiport --dports 1119,3724,6113
 fast "Overwatch" -p udp -m multiport --dports 26500:26599
+
+# Default
 cheap "Default"
 
 # Save for net boot
