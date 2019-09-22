@@ -37,28 +37,32 @@ router_debug_things:
       - iptables-persistent
       - tcpdump  # for debugging
 
+dhcpcd-hook:
+  file.managed:
+    - name: /lib/dhcpcd/dhcpcd-hooks/99-route-setup.sh
+    - source: salt://apps/router/route-setup.sh
+
 nat-setup.sh:
   file.managed:
     - name: /root/nat-setup.sh
     - source: salt://apps/router/nat-setup.sh
+  cmd.wait:
+    - name: /root/nat-setup.sh
+    - cwd: /root
+    - runas: root
+    - watch:
+      - file: nat-setup.sh
 
 mangle-setup.sh:
   file.managed:
     - name: /root/mangle-setup.sh
     - source: salt://apps/router/mangle-setup.sh
-
-route-setup.sh:
-  file.managed:
-    - name: /root/route-setup.sh
-    - source: salt://apps/router/route-setup.sh
   cmd.wait:
-    - name: /root/route-setup.sh
+    - name: /root/mangle-setup.sh
     - cwd: /root
     - runas: root
     - watch:
-      - file: route-setup.sh
       - file: mangle-setup.sh
-      - file: nat-setup.sh
 
 turbo.sh:
   file.managed:

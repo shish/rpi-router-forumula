@@ -12,7 +12,8 @@ might be good to demonstrate a working setup.
 Notable fun:
 - how to give linux network interfaces consistent names across reboots,
   [when they are all USB NICs... with the same MAC address](wwan.rules)
-- how to use [two default gateways with the same IP address](route-setup.sh)
+- how to use [two default gateways with the same IP address, both of
+  which are USB devices which don't run at boot](route-setup.sh)
 - how to use [a raspberry pi as a 5GHz wifi access point](hostapd.conf)
 - how to [route HTTP requests](squid.conf) - web pages over a fast
   connection, while requesting video over a cheap connection - and how
@@ -28,7 +29,6 @@ Coming soon:
 - how to add a button on a raspberry pi which executes a script and
   displays the script output on an LCD display
 - how to intercept and modify HTTPS requests
-- how to save and restore ip rules / routes
 
 It's quite possible that some parts of my setup are sub-optimal or I've missed
  a tool that does exactly what I want out of the box. Issues and pull requests
