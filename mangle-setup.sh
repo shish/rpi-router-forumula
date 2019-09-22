@@ -12,13 +12,13 @@ iptables -t mangle -A OUTPUT -j marking
 
 iptables -t mangle -X three || true
 iptables -t mangle -N three
-iptables -t mangle -A three -j MARK --set-mark 3
+iptables -t mangle -A three -j TOS --set-tos 0x08
 iptables -t mangle -A three -j CONNMARK --set-mark 3
 iptables -t mangle -A three -j ACCEPT
 
 iptables -t mangle -X vodafone || true
 iptables -t mangle -N vodafone
-iptables -t mangle -A vodafone -j MARK --set-mark 4
+iptables -t mangle -A vodafone -j TOS --set-tos 0x04
 iptables -t mangle -A vodafone -j CONNMARK --set-mark 4
 iptables -t mangle -A vodafone -j ACCEPT
 
@@ -41,8 +41,8 @@ function fast {
 # System stuff
 cheap "Premarked Connection" -m connmark --mark 3
 fast "Premarked Connection" -m connmark --mark 4
-cheap "Premarked Packet" -m mark --mark 3
-fast "Premarked Packet" -m mark --mark 4
+cheap "Premarked Packet" -m tos --tos 0x08/0x08
+fast "Premarked Packet" -m tos --tos 0x04/0x04
 
 # Specific destinations
 cheap "Dongle" -p tcp -m tcp --dport 80 -d 192.168.8.1
