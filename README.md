@@ -1,6 +1,12 @@
 Home Router Setup
 =================
 
+No longer updated
+-----------------
+Vodafone now offers a mostly-reliable mostly-uncapped mostly-5G service,
+so I'm using that 99% of the time, with fallback to Three when it goes
+down completely (using a Ubiquity gateway to do failover).
+
 Why are you showing me this?
 ----------------------------
 
